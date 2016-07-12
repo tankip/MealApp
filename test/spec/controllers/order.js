@@ -23,7 +23,6 @@ describe('Controller: OrderCtrl', function () {
      expect(OrderCtrl.totalcost).toBe(300);
   });//end of calculateCost test
 
-  //A function to calculate the function to complete order
 
 });
 
