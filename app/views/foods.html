@@ -1,0 +1,28 @@
+ <div>
+    <div class="modal-header">
+      <h3>Food offered in {{restaurant}}</h3>
+    </div>
+    <input type="text" class="form-control" ng-model="meal.name" placeholder="Search Food">
+    <div class="modal-body">
+
+      <!--Table to show food in restaurant-->
+      <table class="table table-hover">
+          <tr>
+            <th>Food</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+          <tr ng-repeat="meal in foodsinrest | filter:meal.name">
+            <td>{{meal.name}}</td>
+            <td>{{meal.price | currency}}</td>
+            <td><button class="btn btn-primary" ng-controller="OrderCtrl as order" ng-show="tab"  ng-click="$close(order.completeOrder(meal))">Order</button>
+                <button class="btn btn-primary" ng-controller="OrderCtrl as order" ng-hide="tab"  ng-click="$close(order.updateOrder(meal))">Order</button>
+            </td>
+          </tr>
+        </table> 
+    </div>
+        <!--End of food in restaurant-->
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
+    </div>
+ </div>

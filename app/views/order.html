@@ -1,0 +1,68 @@
+<div ng-controller="OrderCtrl as order">
+  <div style="text-align: center; margin: 1%;">
+    <button class="btn btn-success" ng-click="order.activeOrder()">Check Active Order</button>
+    <button class="btn btn-primary" ng-click="order.orderHistory()">Orders History</button>
+  </div>
+  <div ng-show="order.active">
+  <!-- Table to show active orders -->
+    <table class="table table-hover">
+      <tr>
+        <th>Restaurant Selected</th>
+        <th>Created By</th>
+        <th>Action</th>
+        <th>Check Food</th>
+      </tr>
+      <tr ng-repeat="(key, activeorder) in order.orders" ng-show="{{activeorder.status.finalized === false}}">
+        <td>{{activeorder.restaurant}}</td>
+        <td>{{activeorder.name}}</td>
+        <td><button type="button" class="btn btn-primary" ng-click="order.addFood(key, activeorder)">Add Food</button></td>
+        <td><button type="button" class="btn btn-default" ng-click="order.seeOrdered(key)">Check</button></td>
+      </tr>
+    </table>
+    <!--End of active orders-->
+  </div>
+    <div ng-show="order.history">
+      <!--Table to show order history-->
+      <table class="table table-hover">
+        <h3>{{order.title}}</h3>
+        <tr>
+          <th>Restaurant Selected</td>
+          <th>Created By</th>
+          <th>Check Food</th>
+          <th>Order Status</th>
+        </tr>
+        <tr ng-repeat="(key, orderhistory) in order.orders" ng-show="{{orderhistory.status.finalized === true}}">
+          <td>{{orderhistory.restaurant}}</td>
+          <td>{{orderhistory.name}}</td>
+          <td><button type="button" class="btn btn-primary" ng-click="order.seeOrdered(key)">Check</button></td>
+          <td><button type="button" class="btn btn-default">Finalized</button>
+          <button type="button" class="btn btn-success" ng-show="{{orderhistory.status.delivered === true}}">Delivered</button>
+          </td>
+        </tr>
+      </table>
+      <!--End of order history-->
+    </div>
+    
+    <div ng-show="order.seeFood">
+      <table class="table table-hover">
+        <tr>
+          <th>Name</td>
+          <th>Food</th>
+          <th>Price</th>
+        </tr>
+        <tr ng-repeat="(key, foody) in order.foodordered">
+          <td>{{foody.name}}</td>
+          <td>{{foody.food}}</td>
+          <td>{{foody.price | currency}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">Total Cost</td>
+          <td><button class="btn btn-success">{{order.totalcost | currency}}</button></td>
+        </tr>
+        <tr><td><button type="button" class="btn btn-primary" ng-click="order.changeStatus()" ng-hide="">Finalize</button></td></tr>
+      </table>
+    </div>  
+
+    </div>
+  </div>
+  </div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <div ng-controller="RestaurantCtrl as food">
+    <div class="jumbotron" ng-show="food.showRestaurant">
+      <!--Form to show the restaurant to select from-->
+      <form class="form-horizontal" name="create" ng-submit="food.selectFoods()">
+        <h4>Select a restaurant</h4>
+        <div class="form-group">
+          <select class="form-control" ng-model="food.restaurantselect" required>
+              <option ng-repeat="(key, restaurant) in food.restaurants" value="{{key}}">{{restaurant.restname}}</option>
+          </select><br>    
+          <button class="btn btn-primary" ng-disabled="create.$invalid" data-target="#myModal">Select Restaurant</button>
+        </div>
+      </form>
+      <!--End of restaurant form-->
+    </div>
+  </div>
+</div>
